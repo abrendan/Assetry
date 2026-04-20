@@ -1,3 +1,8 @@
+.agents/
+.cache/
+.local/
+.replit
+.replitignore
 data/*.db-journal
 data/*.db-wal
 data/*.db-shm
