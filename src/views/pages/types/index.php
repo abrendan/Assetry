@@ -3,13 +3,13 @@
         <div class="form-section">
             <h3 class="form-section-title">Asset Types</h3>
             <p class="text-muted" style="font-size:0.9rem;margin-bottom:1rem">
-                Create custom types (like <em>Vibrator</em>, <em>Dildo</em>, <em>Laptop</em>, <em>Camera</em>) and define your own fields for each (e.g. Insertable Length, Storage GB, Sensor Size). When you set an asset's <strong>Type</strong> to a defined name, those fields will appear on the asset form.
+                Create custom types (like <em>Laptop</em>, <em>Monitor</em>, <em>Printer</em>, <em>Camera</em>) and define your own fields for each (e.g. Storage GB, Screen Size, Sensor Size). When you set an asset's <strong>Type</strong> to a defined name, those fields will appear on the asset form.
             </p>
             <form method="POST" action="/types/add" style="display:flex;gap:0.5rem;align-items:end;margin-bottom:1.5rem">
                 <input type="hidden" name="csrf_token" value="<?= csrf() ?>">
                 <div class="form-group" style="margin:0;flex:1">
                     <label class="form-label">New Type Name</label>
-                    <input type="text" name="name" class="form-input" placeholder="e.g. Vibrator" required>
+                    <input type="text" name="name" class="form-input" placeholder="e.g. Laptop" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Add Type</button>
             </form>

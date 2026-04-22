@@ -14,7 +14,7 @@
 <div class="auth-container">
     <div class="auth-brand">
         <div class="auth-brand-icon auth-brand-icon-img">
-            <img src="/static/logo.svg" alt="Assetry" width="56" height="56">
+            <img src="/static/logo.svg" alt="Assetry" width="72" height="72">
         </div>
         <span class="auth-brand-name">Assetry</span>
     </div>

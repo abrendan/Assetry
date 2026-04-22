@@ -310,18 +310,18 @@ input, select, textarea { font-family: var(--font); }
 }
 
 .auth-brand-icon {
-    width: 44px;
-    height: 44px;
+    width: 72px;
+    height: 72px;
     background: var(--accent);
-    border-radius: 12px;
+    border-radius: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 0 24px var(--accent-glow);
+    box-shadow: 0 0 32px var(--accent-glow);
 }
 
 .auth-brand-name {
-    font-size: 1.5rem;
+    font-size: 2.4rem;
     font-weight: 700;
     letter-spacing: -0.03em;
     color: var(--text);
