@@ -1753,3 +1753,95 @@ input, select, textarea { font-family: var(--font); }
 
 /* ===== TRANSITIONS ===== */
 * { transition-property: background-color, border-color, color, opacity, box-shadow; transition-duration: 0.12s; transition-timing-function: ease; }
+
+/* Cover thumbnail in tables */
+.cell-cover {
+    width: 56px;
+    height: 56px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: #0f0f17;
+    border: 1px solid var(--border);
+    padding: 0;
+    cursor: zoom-in;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    display: block;
+}
+.cell-cover:hover {
+    transform: scale(1.04);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.45);
+    border-color: var(--accent);
+}
+.cell-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.cell-icon-placeholder {
+    width: 56px;
+    height: 56px;
+    border-radius: 8px;
+    background: var(--bg-elevated);
+    border: 1px solid var(--border);
+    justify-content: center;
+}
+.cell-primary-text { min-width: 0; flex: 1; }
+
+/* Image lightbox */
+.lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(6px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 2rem;
+    animation: lb-fade 0.18s ease;
+}
+.lightbox-overlay.is-open { display: flex; }
+@keyframes lb-fade { from { opacity: 0; } to { opacity: 1; } }
+.lightbox-content {
+    position: relative;
+    max-width: min(90vw, 1100px);
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+.lightbox-content img {
+    max-width: 100%;
+    max-height: 80vh;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    background: #0f0f17;
+    object-fit: contain;
+}
+.lightbox-caption {
+    color: #d1d5db;
+    font-size: 0.9rem;
+    text-align: center;
+    max-width: 100%;
+}
+.lightbox-close {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: var(--accent);
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.5);
+}
+.lightbox-close:hover { filter: brightness(1.15); }

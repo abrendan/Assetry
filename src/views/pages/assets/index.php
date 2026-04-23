@@ -55,13 +55,13 @@
                 <td>
                     <div class="cell-primary">
                         <?php if (!empty($asset['cover_image'])): ?>
-                        <div style="width:36px;height:36px;border-radius:6px;overflow:hidden;flex-shrink:0;background:#0f0f17">
-                            <img src="/uploads/<?= e($asset['cover_image']) ?>" alt="" style="width:100%;height:100%;object-fit:cover;display:block">
-                        </div>
+                        <button type="button" class="cell-cover" data-lightbox="/uploads/<?= e($asset['cover_image']) ?>" data-lightbox-caption="<?= e($asset['name']) ?>" title="Preview cover">
+                            <img src="/uploads/<?= e($asset['cover_image']) ?>" alt="<?= e($asset['name']) ?>">
+                        </button>
                         <?php else: ?>
-                        <div class="cell-icon"><?= categoryIcon($asset['category']) ?></div>
+                        <div class="cell-icon cell-icon-placeholder"><?= categoryIcon($asset['category']) ?></div>
                         <?php endif; ?>
-                        <div>
+                        <div class="cell-primary-text">
                             <a href="/assets/<?= $asset['id'] ?>" class="cell-link"><?= e($asset['name']) ?></a>
                         </div>
                     </div>
