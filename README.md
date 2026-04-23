@@ -31,6 +31,15 @@ A complete inventory platform for hardware, software keys, licenses, network gea
 | **Image Uploads** | Local image uploads for assets and vault items, with cover/gallery support. |
 | **Modern Dark UI** | Clean, responsive interface designed for daily use. |
 
+## Screenshots
+
+<div align="center">
+
+<img src="docs/screenshots/login.png" alt="Login screen" width="420" />
+<img src="docs/screenshots/dashboard.png" alt="Dashboard" width="420" />
+
+</div>
+
 ## Quick Start
 
 ### Using PHP's built-in server
