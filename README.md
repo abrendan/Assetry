@@ -35,8 +35,7 @@ A complete inventory platform for hardware, software keys, licenses, network gea
 
 <div align="center">
 
-<img src="docs/screenshots/login.png" alt="Login screen" width="420" />
-<img src="docs/screenshots/dashboard.png" alt="Dashboard" width="420" />
+<img src="docs/screenshots/dashboard.png" alt="Dashboard" width="1000" />
 
 </div>
 
