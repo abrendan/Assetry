@@ -48,12 +48,12 @@
                         <?php endif; ?>
                         <div style="position:absolute;bottom:4px;right:4px;display:flex;gap:4px">
                             <?php if (!$img['is_cover']): ?>
-                            <form method="POST" action="/vault/<?= $v['id'] ?>/images/<?= $img['id'] ?>/cover" style="display:inline">
+                            <form method="POST" action="/vault/<?= $v['id'] ?>/images/<?= $img['id'] ?>/cover">
                                 <input type="hidden" name="csrf_token" value="<?= csrf() ?>">
                                 <button type="submit" class="icon-btn" title="Set as cover" style="background:rgba(0,0,0,0.6);color:#fff;border:none;padding:3px 6px;border-radius:4px;font-size:0.65rem;cursor:pointer">★</button>
                             </form>
                             <?php endif; ?>
-                            <form method="POST" action="/vault/<?= $v['id'] ?>/images/<?= $img['id'] ?>/delete" style="display:inline" onsubmit="return confirm('Delete this image?')">
+                            <form method="POST" action="/vault/<?= $v['id'] ?>/images/<?= $img['id'] ?>/delete" onsubmit="return confirm('Delete this image?')">
                                 <input type="hidden" name="csrf_token" value="<?= csrf() ?>">
                                 <button type="submit" class="icon-btn" title="Delete" style="background:rgba(220,38,38,0.85);color:#fff;border:none;padding:3px 6px;border-radius:4px;font-size:0.65rem;cursor:pointer">✕</button>
                             </form>

@@ -114,3 +114,84 @@ route('GET', '/admin/logs', function($params) {
     ob_start(); require __DIR__ . '/../views/pages/admin/logs.php'; $content = ob_get_clean();
     require __DIR__ . '/../views/layouts/main.php';
 });
+
+route('GET', '/admin/sql', function($params) {
+    requireAdmin();
+    $db = getDB();
+    $tables = [];
+    $rows = $db->query("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name")->fetchAll();
+    foreach ($rows as $r) {
+        $name = $r['name'];
+        try {
+            $count = (int)$db->query("SELECT COUNT(*) FROM \"$name\"")->fetchColumn();
+            $cols = $db->query("PRAGMA table_info(\"$name\")")->fetchAll();
+            $colList = implode(', ', array_map(fn($c) => $c['name'] . ' (' . $c['type'] . ')', $cols));
+        } catch (Throwable $e) {
+            $count = 0;
+            $colList = '';
+        }
+        $tables[] = ['name' => $name, 'count' => $count, 'columns' => $colList];
+    }
+    $title = 'SQL Console';
+    ob_start(); require __DIR__ . '/../views/pages/admin/sql.php'; $content = ob_get_clean();
+    require __DIR__ . '/../views/layouts/main.php';
+});
+
+route('POST', '/admin/sql', function($params) {
+    requireAdmin();
+    verifyCsrf();
+    $user = currentUser();
+    $db = getDB();
+
+    $query = trim($_POST['query'] ?? '');
+    $results = null;
+    $columns = [];
+    $error = null;
+    $rowsAffected = null;
+    $execTime = null;
+    $queryType = '';
+
+    if ($query === '') {
+        flash('error', 'Query cannot be empty');
+        redirect('/admin/sql');
+    }
+
+    $firstWord = strtoupper(preg_replace('/^\s*(\w+).*$/s', '$1', $query));
+    $queryType = in_array($firstWord, ['SELECT','WITH','PRAGMA','EXPLAIN']) ? 'SELECT' : $firstWord;
+
+    try {
+        $start = microtime(true);
+        $stmt = $db->query($query);
+        $execTime = microtime(true) - $start;
+        if ($queryType === 'SELECT') {
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $columns = !empty($results) ? array_keys($results[0]) : [];
+        } else {
+            $rowsAffected = $stmt->rowCount();
+            $results = [];
+        }
+        logActivity($user['id'], 'sql_query', null, null, substr($queryType . ': ' . preg_replace('/\s+/', ' ', $query), 0, 240));
+    } catch (Throwable $e) {
+        $error = $e->getMessage();
+        logActivity($user['id'], 'sql_query_failed', null, null, substr($e->getMessage() . ' | ' . preg_replace('/\s+/', ' ', $query), 0, 240));
+    }
+
+    $tables = [];
+    $rows = $db->query("SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%' ORDER BY name")->fetchAll();
+    foreach ($rows as $r) {
+        $name = $r['name'];
+        try {
+            $count = (int)$db->query("SELECT COUNT(*) FROM \"$name\"")->fetchColumn();
+            $cols = $db->query("PRAGMA table_info(\"$name\")")->fetchAll();
+            $colList = implode(', ', array_map(fn($c) => $c['name'] . ' (' . $c['type'] . ')', $cols));
+        } catch (Throwable $e) {
+            $count = 0;
+            $colList = '';
+        }
+        $tables[] = ['name' => $name, 'count' => $count, 'columns' => $colList];
+    }
+
+    $title = 'SQL Console';
+    ob_start(); require __DIR__ . '/../views/pages/admin/sql.php'; $content = ob_get_clean();
+    require __DIR__ . '/../views/layouts/main.php';
+});

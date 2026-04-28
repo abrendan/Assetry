@@ -122,12 +122,12 @@
                     <?php endif; ?>
                     <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(to top, rgba(0,0,0,0.85), transparent);padding:0.5rem;display:flex;gap:0.4rem;justify-content:center">
                         <?php if (!$img['is_cover']): ?>
-                        <form method="POST" action="/assets/<?= $asset['id'] ?>/images/<?= $img['id'] ?>/cover" style="display:inline">
+                        <form method="POST" action="/assets/<?= $asset['id'] ?>/images/<?= $img['id'] ?>/cover">
                             <input type="hidden" name="csrf_token" value="<?= csrf() ?>">
                             <button type="submit" class="btn btn-sm btn-ghost" style="background:rgba(255,255,255,0.1)">Set cover</button>
                         </form>
                         <?php endif; ?>
-                        <form method="POST" action="/assets/<?= $asset['id'] ?>/images/<?= $img['id'] ?>/delete" style="display:inline" onsubmit="return confirm('Delete this image?')">
+                        <form method="POST" action="/assets/<?= $asset['id'] ?>/images/<?= $img['id'] ?>/delete" onsubmit="return confirm('Delete this image?')">
                             <input type="hidden" name="csrf_token" value="<?= csrf() ?>">
                             <button type="submit" class="btn btn-sm btn-ghost" style="background:rgba(239,68,68,0.2);color:#fca5a5">Delete</button>
                         </form>

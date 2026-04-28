@@ -28,7 +28,7 @@
             <?php foreach ($grouped[$type] as $c): ?>
             <span class="cat-pill" style="display:inline-flex;align-items:center;gap:0.4rem">
                 <?= e($c['name']) ?>
-                <form method="POST" action="/categories/<?= $c['id'] ?>/delete" style="display:inline" onsubmit="return confirm('Remove this category?')">
+                <form method="POST" action="/categories/<?= $c['id'] ?>/delete" onsubmit="return confirm('Remove this category?')">
                     <input type="hidden" name="csrf_token" value="<?= csrf() ?>">
                     <button type="submit" style="background:none;border:none;color:#ef4444;cursor:pointer;padding:0;font-size:1rem;line-height:1">×</button>
                 </form>

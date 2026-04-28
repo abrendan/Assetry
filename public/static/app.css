@@ -446,9 +446,15 @@ input, select, textarea { font-family: var(--font); }
     justify-content: center;
     width: 28px;
     height: 28px;
+    padding: 0;
+    border: none;
     border-radius: 6px;
     color: var(--text-muted);
+    background: transparent;
     transition: all 0.15s;
+    vertical-align: middle;
+    box-sizing: border-box;
+    line-height: 1;
 }
 
 .icon-btn:hover {
@@ -666,12 +672,15 @@ input, select, textarea { font-family: var(--font); }
     display: inline-flex;
     align-items: center;
     gap: 0.25rem;
-    padding: 0.2rem 0.5rem;
+    padding: 0 0.5rem;
     border-radius: 4px;
     font-size: 0.7rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.04em;
+    vertical-align: middle;
+    height: 22px;
+    box-sizing: border-box;
 }
 
 .badge-success { background: rgba(16,185,129,0.15); color: #34d399; }
@@ -746,10 +755,20 @@ input, select, textarea { font-family: var(--font); }
 }
 
 .cell-actions {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
+    text-align: right;
     white-space: nowrap;
+}
+.cell-actions > * {
+    vertical-align: middle;
+}
+.cell-actions form {
+    display: contents;
+}
+.cell-actions .icon-btn + .icon-btn,
+.cell-actions form + .icon-btn,
+.cell-actions .icon-btn + form,
+.cell-actions form + form {
+    margin-left: 0.15rem;
 }
 
 .table-footer {
@@ -1756,8 +1775,8 @@ input, select, textarea { font-family: var(--font); }
 
 /* Cover thumbnail in tables */
 .cell-cover {
-    width: 56px;
-    height: 56px;
+    width: 44px;
+    height: 44px;
     border-radius: 8px;
     overflow: hidden;
     flex-shrink: 0;
@@ -1765,12 +1784,10 @@ input, select, textarea { font-family: var(--font); }
     border: 1px solid var(--border);
     padding: 0;
     cursor: zoom-in;
-    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    transition: border-color 0.15s ease;
     display: block;
 }
 .cell-cover:hover {
-    transform: scale(1.04);
-    box-shadow: 0 4px 14px rgba(0,0,0,0.45);
     border-color: var(--accent);
 }
 .cell-cover img {
@@ -1780,8 +1797,8 @@ input, select, textarea { font-family: var(--font); }
     display: block;
 }
 .cell-icon-placeholder {
-    width: 56px;
-    height: 56px;
+    width: 44px;
+    height: 44px;
     border-radius: 8px;
     background: var(--bg-elevated);
     border: 1px solid var(--border);

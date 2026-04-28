@@ -31,7 +31,7 @@
                 </td>
                 <td class="text-muted"><?= e($u['email']) ?></td>
                 <td>
-                    <form method="POST" action="/admin/users/<?= $u['id'] ?>/role" style="display:inline">
+                    <form method="POST" action="/admin/users/<?= $u['id'] ?>/role">
                         <input type="hidden" name="csrf_token" value="<?= csrf() ?>">
                         <select name="role" onchange="this.form.submit()" class="form-select-inline <?= $u['role'] === 'admin' ? 'select-admin' : '' ?>">
                             <option value="user" <?= $u['role'] === 'user' ? 'selected' : '' ?>>User</option>
@@ -50,14 +50,14 @@
                 </td>
                 <td>
                     <div style="display:flex;gap:0.4rem;flex-wrap:wrap">
-                        <form method="POST" action="/admin/users/<?= $u['id'] ?>/toggle" style="display:inline">
+                        <form method="POST" action="/admin/users/<?= $u['id'] ?>/toggle">
                             <input type="hidden" name="csrf_token" value="<?= csrf() ?>">
                             <button type="submit" class="btn btn-sm <?= $u['is_active'] ? 'btn-ghost' : 'btn-secondary' ?>" onclick="return confirm('Change user status?')">
                                 <?= $u['is_active'] ? 'Deactivate' : 'Activate' ?>
                             </button>
                         </form>
                         <button type="button" class="btn btn-sm btn-ghost" onclick="resetPassword(<?= $u['id'] ?>, '<?= e($u['username']) ?>')">Reset PW</button>
-                        <form method="POST" action="/admin/users/<?= $u['id'] ?>/delete" style="display:inline">
+                        <form method="POST" action="/admin/users/<?= $u['id'] ?>/delete">
                             <input type="hidden" name="csrf_token" value="<?= csrf() ?>">
                             <button type="submit" class="btn btn-sm btn-ghost" style="color:#ef4444" onclick="return confirm('Delete user <?= e($u['username']) ?>? This cannot be undone.')">Delete</button>
                         </form>
